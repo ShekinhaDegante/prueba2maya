@@ -1,0 +1,46 @@
+﻿@model prueba2maya.Models.DetallePedidosProveedore
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>DetallePedidosProveedore</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdPedidoProveedor" class="control-label"></label>
+                <select asp-for="IdPedidoProveedor" class ="form-control" asp-items="ViewBag.IdPedidoProveedor"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdProducto" class="control-label"></label>
+                <select asp-for="IdProducto" class ="form-control" asp-items="ViewBag.IdProducto"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CantidadSolicitada" class="control-label"></label>
+                <input asp-for="CantidadSolicitada" class="form-control" />
+                <span asp-validation-for="CantidadSolicitada" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrecioUnitario" class="control-label"></label>
+                <input asp-for="PrecioUnitario" class="form-control" />
+                <span asp-validation-for="PrecioUnitario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

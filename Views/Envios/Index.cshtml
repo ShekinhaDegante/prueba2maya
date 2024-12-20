@@ -1,0 +1,76 @@
+﻿@model IEnumerable<prueba2maya.Models.Envio>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<!-- Mostrar solo si el usuario es administrador -->
+@if (User.IsInRole("Administrador"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DireccionEnvio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadoEnvio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaEnvio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaEntrega)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPedidoNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdSucursalRetiroNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DireccionEnvio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstadoEnvio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaEnvio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaEntrega)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdPedidoNavigation.IdPedido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdSucursalRetiroNavigation.IdSucursal)
+                </td>
+                <td>
+                    <!-- Mostrar los botones de acción solo si el usuario es administrador -->
+                    @if (User.IsInRole("Administrador"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.IdEnvio">Edit</a>
+ 
+                    <a asp-action="Details" asp-route-id="@item.IdEnvio"> Details </a> 
+                    <a asp-action="Delete" asp-route-id="@item.IdEnvio"> Delete </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
