@@ -1,4 +1,4 @@
-﻿@model IEnumerable<prueba2maya.Models.AuditoriaInventario>
+﻿@* @model IEnumerable<prueba2maya.Models.AuditoriaInventario>
 
 @{
     ViewData["Title"] = "Index";
@@ -57,3 +57,72 @@
 }
     </tbody>
 </table>
+ *@
+
+
+
+
+
+
+@model IEnumerable<prueba2maya.Models.AuditoriaInventario>
+
+@{
+    ViewData["Title"] = "Auditoría de Inventario";
+}
+
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h1>Auditoría de Inventario</h1>
+        <p>Aquí puedes gestionar las auditorías realizadas sobre el inventario.</p>
+    </div>
+
+    <!-- Mostrar solo si el usuario es administrador -->
+    @if (User.IsInRole("Administrador"))
+    {
+        <div class="d-flex justify-content-end mb-3">
+            <a asp-action="Create" class="btn btn-warning text-white">
+                <i class="bi bi-plus-circle"></i> Crear Nueva Auditoría
+            </a>
+        </div>
+    }
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.CantidadAntes)</th>
+                <th>@Html.DisplayNameFor(model => model.CantidadDespues)</th>
+                <th>@Html.DisplayNameFor(model => model.FechaAuditoria)</th>
+                <th>@Html.DisplayNameFor(model => model.IdProductoNavigation)</th>
+                <th>@Html.DisplayNameFor(model => model.RealizadoPorNavigation)</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.CantidadAntes)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CantidadDespues)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FechaAuditoria)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdProductoNavigation.IdProducto)</td>
+                    <td>@Html.DisplayFor(modelItem => item.RealizadoPorNavigation.IdUsuario)</td>
+                    <td class="text-center">
+                        <!-- Mostrar los botones de acción solo si el usuario es administrador -->
+                        @if (User.IsInRole("Administrador"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.IdAuditoria" class="btn btn-sm btn-outline-warning">
+                                <i class="bi bi-pencil-square"></i> Editar
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.IdAuditoria" class="btn btn-sm btn-outline-info">
+                                <i class="bi bi-info-circle"></i> Detalles
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.IdAuditoria" class="btn btn-sm btn-outline-danger">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

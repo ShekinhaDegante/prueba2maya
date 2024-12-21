@@ -1,4 +1,4 @@
-﻿@model IEnumerable<prueba2maya.Models.HistorialPedido>
+﻿@* @model IEnumerable<prueba2maya.Models.HistorialPedido>
 
 @{
     ViewData["Title"] = "Index";
@@ -68,3 +68,67 @@
         }
     </tbody>
 </table>
+ *@
+
+@model IEnumerable<prueba2maya.Models.HistorialPedido>
+
+@{
+    ViewData["Title"] = "Historial de Pedidos";
+}
+
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h1>Historial de Pedidos</h1>
+        <p>Consulta los cambios en el estado de los pedidos.</p>
+    </div>
+
+    <!-- Mostrar solo si el usuario es administrador -->
+    @if (User.IsInRole("Administrador"))
+    {
+        <div class="d-flex justify-content-end mb-3">
+            <a asp-action="Create" class="btn btn-warning text-white">
+                <i class="bi bi-plus-circle"></i> Crear Historial de Pedido
+            </a>
+        </div>
+    }
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.EstadoAnterior)</th>
+                <th>@Html.DisplayNameFor(model => model.EstadoNuevo)</th>
+                <th>@Html.DisplayNameFor(model => model.FechaCambio)</th>
+                <th>@Html.DisplayNameFor(model => model.ActualizadoPorNavigation)</th>
+                <th>@Html.DisplayNameFor(model => model.IdPedidoNavigation)</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.EstadoAnterior)</td>
+                    <td>@Html.DisplayFor(modelItem => item.EstadoNuevo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FechaCambio)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ActualizadoPorNavigation.IdUsuario)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdPedidoNavigation.IdPedido)</td>
+                    <td class="text-center">
+                        <!-- Mostrar los botones de acción solo si el usuario es administrador -->
+                        @if (User.IsInRole("Administrador"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.IdHistorialPedido" class="btn btn-sm btn-outline-warning">
+                                <i class="bi bi-pencil-square"></i> Editar
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.IdHistorialPedido" class="btn btn-sm btn-outline-info">
+                                <i class="bi bi-info-circle"></i> Detalles
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.IdHistorialPedido" class="btn btn-sm btn-outline-danger">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

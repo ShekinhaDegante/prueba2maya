@@ -1,4 +1,4 @@
-﻿@model IEnumerable<prueba2maya.Models.CarritoVenta>
+﻿@* @model IEnumerable<prueba2maya.Models.CarritoVenta>
 
 @{
     ViewData["Title"] = "Index";
@@ -39,3 +39,65 @@
 }
     </tbody>
 </table>
+ *@
+
+
+
+
+
+@model IEnumerable<prueba2maya.Models.CarritoVenta>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h1 class="titulo-categoria">Carrito de Ventas</h1>
+        <p class="descripcion-categoria">Aquí puedes gestionar las ventas en el carrito.</p>
+    </div>
+
+    <!-- Mostrar solo si el usuario es administrador -->
+    @if (User.IsInRole("Administrador"))
+    {
+        <div class="d-flex justify-content-end mb-3">
+            <a asp-action="Create" class="btn btn-warning text-white btn-crear-categoria">
+                <i class="bi bi-cart-plus"></i> Crear Nueva Venta
+            </a>
+        </div>
+    }
+
+    <table class="table table-striped table-hover tabla-categoria">
+        <thead class="table-light">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.FechaCreacion)</th>
+                <th>@Html.DisplayNameFor(model => model.IdUsuarioNavigation)</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.FechaCreacion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdUsuarioNavigation.IdUsuario)</td>
+                    <td class="text-center">
+                        <!-- Mostrar los botones de acción solo si el usuario es administrador -->
+                        @if (User.IsInRole("Administrador"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.IdCarrito" class="btn btn-sm btn-outline-warning">
+                                <i class="bi bi-pencil-square"></i> Editar
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.IdCarrito" class="btn btn-sm btn-outline-info">
+                                <i class="bi bi-info-circle"></i> Detalles
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.IdCarrito" class="btn btn-sm btn-outline-danger">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

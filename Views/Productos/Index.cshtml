@@ -1,4 +1,4 @@
-﻿@model IEnumerable<prueba2maya.Models.Producto>
+﻿@* @model IEnumerable<prueba2maya.Models.Producto>
 
 @{
     ViewData["Title"] = "Index";
@@ -86,3 +86,75 @@
         }
     </tbody>
 </table>
+ *@
+
+
+
+@model IEnumerable<prueba2maya.Models.Producto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h1 class="titulo-categoria">Productos</h1>
+        <p class="descripcion-categoria">Aquí puedes gestionar los productos disponibles.</p>
+    </div>
+
+    <!-- Mostrar solo si el usuario es administrador -->
+    @if (User.IsInRole("Administrador"))
+    {
+        <div class="d-flex justify-content-end mb-3">
+            <a asp-action="Create" class="btn btn-warning text-white btn-crear-categoria">
+                <i class="bi bi-plus-circle"></i> Crear Nuevo Producto
+            </a>
+        </div>
+    }
+
+    <table class="table table-striped table-hover tabla-categoria">
+        <thead class="table-light">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.NombreProducto)</th>
+                <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
+                <th>@Html.DisplayNameFor(model => model.Precio)</th>
+                <th>@Html.DisplayNameFor(model => model.CantidadDisponible)</th>
+                <th>@Html.DisplayNameFor(model => model.ImagenUrl)</th>
+                <th>@Html.DisplayNameFor(model => model.IdCategoriaNavigation)</th>
+                <th>@Html.DisplayNameFor(model => model.IdProveedorNavigation)</th>
+                <th>@Html.DisplayNameFor(model => model.IdSucursalNavigation)</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.NombreProducto)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Precio)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CantidadDisponible)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ImagenUrl)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdCategoriaNavigation.IdCategoria)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdProveedorNavigation.IdProveedor)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdSucursalNavigation.IdSucursal)</td>
+                    <td class="text-center">
+                        <!-- Mostrar solo si el usuario es administrador -->
+                        @if (User.IsInRole("Administrador"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.IdProducto" class="btn btn-sm btn-outline-warning">
+                                <i class="bi bi-pencil-square"></i> Editar
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.IdProducto" class="btn btn-sm btn-outline-info">
+                                <i class="bi bi-info-circle"></i> Detalles
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.IdProducto" class="btn btn-sm btn-outline-danger">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

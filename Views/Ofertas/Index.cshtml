@@ -1,4 +1,4 @@
-﻿@model IEnumerable<prueba2maya.Models.Oferta>
+﻿@* @model IEnumerable<prueba2maya.Models.Oferta>
 
 @{
     ViewData["Title"] = "Index";
@@ -62,3 +62,71 @@
         }
     </tbody>
 </table>
+ *@
+
+
+
+
+
+
+
+@model IEnumerable<prueba2maya.Models.Oferta>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h1>Ofertas</h1>
+        <p>Aquí puedes gestionar las ofertas disponibles.</p>
+    </div>
+
+    <!-- Mostrar solo si el usuario es administrador -->
+    @if (User.IsInRole("Administrador"))
+    {
+        <div class="d-flex justify-content-end mb-3">
+            <a asp-action="Create" class="btn btn-warning text-white">
+                <i class="bi bi-cart-plus"></i> Crear Nueva Oferta
+            </a>
+        </div>
+    }
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.PorcentajeDescuento)</th>
+                <th>@Html.DisplayNameFor(model => model.FechaInicio)</th>
+                <th>@Html.DisplayNameFor(model => model.FechaFin)</th>
+                <th>@Html.DisplayNameFor(model => model.IdProductoNavigation)</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.PorcentajeDescuento)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FechaInicio)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FechaFin)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdProductoNavigation.IdProducto)</td>
+                    <td class="text-center">
+                        <!-- Mostrar los botones de acción solo si el usuario es administrador -->
+                        @if (User.IsInRole("Administrador"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.IdOferta" class="btn btn-sm btn-outline-warning">
+                                <i class="bi bi-pencil-square"></i> Editar
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.IdOferta" class="btn btn-sm btn-outline-info">
+                                <i class="bi bi-info-circle"></i> Detalles
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.IdOferta" class="btn btn-sm btn-outline-danger">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
