@@ -29,3 +29,5 @@ namespace prueba2maya.ViewModels
         public int IdRol { get; set; }  // ID del rol seleccionado
     }
 }
+
+

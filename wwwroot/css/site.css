@@ -1,4 +1,98 @@
-html {
+
+/* Estilos generales */
+body {
+    background-color: #fff8e1; /* Fondo claro tipo ámbar */
+    color: #3e2723; /* Texto en marrón oscuro */
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    max-width: 900px;
+    margin-top: 50px;
+}
+
+.card {
+    border: 1px solid #c5a400; /* Borde dorado */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #c5a400; /* Fondo dorado para encabezado */
+    color: white;
+    padding: 15px;
+    font-size: 20px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card-body {
+    background-color: #fff3e0; /* Fondo más suave */
+    padding: 20px;
+}
+
+form .form-group label {
+    font-weight: bold;
+    color: #3e2723;
+}
+
+/* Estilo para los inputs */
+input.form-control {
+    background-color: #fff9c4; /* Fondo ámbar suave */
+    border: 1px solid #c5a400; /* Borde dorado */
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+    input.form-control:focus {
+        border-color: #ffb300; /* Borde dorado en el enfoque */
+        box-shadow: 0 0 5px rgba(255, 179, 0, 0.6); /* Sombra de enfoque en dorado */
+    }
+
+    input.form-control::placeholder {
+        color: #3e2723;
+    }
+
+/* Estilos para el botón */
+button.btn-primary {
+    background-color: #c5a400; /* Color de fondo dorado */
+    border: none;
+    border-radius: 5px;
+    padding: 12px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    button.btn-primary:hover {
+        background-color: #ffb300; /* Hover dorado */
+    }
+
+/* Estilos para los mensajes de error */
+.text-danger {
+    color: #d32f2f;
+    font-size: 14px;
+}
+
+/* Estilo para el selector de rol */
+select.form-control {
+    background-color: #fff9c4;
+    border: 1px solid #c5a400;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+    select.form-control:focus {
+        border-color: #ffb300;
+        box-shadow: 0 0 5px rgba(255, 179, 0, 0.6);
+    }
+
+
+/*html {
   font-size: 14px;
 }
 
@@ -15,4 +109,104 @@ html {
 
 body {
   margin-bottom: 60px;
+}*/
+
+/* Diseño responsivo para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .text-center {
+        padding: 2rem;
+        font-size: 0.9rem;
+    }
+
+        .text-center h1 {
+            font-size: 2rem;
+        }
 }
+
+
+/* Estilos generales para el contenido */
+/*body {
+    background-color: #fff8e1;*/ /* Fondo suave en tono ámbar */
+    /*color: #3e2723;*/ /* Texto en marrón oscuro */
+    /*font-family: 'Arial', sans-serif;
+}*/
+
+h1 {
+    color: #c5a400; /* Título en dorado */
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Estilos para la tabla */
+table.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff3e0; /* Fondo ámbar suave para la tabla */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+    table.table th, table.table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #c5a400; /* Borde dorado en las filas */
+    }
+
+    table.table th {
+        background-color: #c5a400; /* Fondo dorado para los encabezados */
+        color: white;
+        font-size: 18px;
+    }
+
+    table.table td {
+        background-color: #fff9c4; /* Fondo suave ámbar para las celdas */
+        color: #3e2723; /* Texto en marrón oscuro */
+        font-size: 16px;
+    }
+
+    table.table tr:hover {
+        background-color: #ffe082; /* Resaltar filas cuando el cursor pasa por encima */
+    }
+
+/* Estilos para los enlaces de acción */
+a {
+    color: #c5a400; /* Color dorado para los enlaces */
+    text-decoration: none;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+    a:hover {
+        color: #ffb300; /* Hover en un dorado más claro */
+    }
+
+/* Estilo de la sección de administración */
+p {
+    text-align: right;
+}
+
+    p a {
+        background-color: #c5a400; /* Fondo dorado para el botón */
+        color: white;
+        padding: 8px 15px;
+        border-radius: 5px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+        p a:hover {
+            background-color: #ffb300; /* Hover dorado más claro */
+        }
+
+/* Estilos de botones en el lado de las acciones */
+a[asp-action="Edit"], a[asp-action="Details"], a[asp-action="Delete"] {
+    background-color: #ffb300; /* Fondo dorado claro */
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+    a[asp-action="Edit"]:hover, a[asp-action="Details"]:hover, a[asp-action="Delete"]:hover {
+        background-color: #ff9800; /* Cambio de color a un dorado más cálido en hover */
+    }
