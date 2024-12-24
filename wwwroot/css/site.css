@@ -432,3 +432,17 @@ table.table-light th {
         background-color: #8B0000;
         color: #FFF;
     }
+
+
+    /*correccion param ellipse boton verde*/
+
+.btn-create {
+    background-color: #FFBF00; /* Fondo dorado */
+    color: white;
+    border: none;
+    font-weight: bold;
+}
+
+    .btn-create:hover {
+        background-color: #B5651D; /* Fondo marrón oscuro al pasar el mouse */
+    }
