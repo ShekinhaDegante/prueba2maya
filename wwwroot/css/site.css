@@ -301,6 +301,16 @@ h1 {
     margin-bottom: 30px;
 }
 
+/* Contenedor principal para ajustar el fondo */
+.container {
+    max-width: 1200px; /* Ampliar el ancho máximo */
+    padding: 20px; /* Espaciado interno */
+    background-color: #fff8e1; /* Fondo claro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin: 30px auto; /* Centrar el contenedor */
+}
+
 /* Estilos para la tabla */
 table.table {
     width: 100%;
@@ -330,6 +340,7 @@ table.table {
     table.table tr:hover {
         background-color: #ffe082; /* Resaltar filas cuando el cursor pasa por encima */
     }
+
 
 /* Estilos para los enlaces de acción */
 a {
@@ -445,4 +456,49 @@ table.table-light th {
 
     .btn-create:hover {
         background-color: #B5651D; /* Fondo marrón oscuro al pasar el mouse */
+    }
+
+
+  /*  PLUSS*/
+/* Estilo para el menú desplegable */
+.dropdown-menu .dropdown-item {
+    background-color: #FFF2CC; /* Fondo claro con tono ámbar suave */
+    color: #E67E22; /* Texto naranja oscuro sutil */
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+    .dropdown-menu .dropdown-item:hover,
+    .dropdown-menu .dropdown-item:focus {
+        background-color: #D35400; /* Fondo naranja oscuro y menos brillante al pasar el mouse o seleccionar */
+        color: #FFF; /* Texto blanco */
+    }
+
+
+
+/* Ampliación del fondo detrás de las tablas */
+.table-container {
+    background-color: #fff9c4; /* Fondo ámbar suave */
+    padding: 30px; /* Espaciado interno para mayor amplitud */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    margin-bottom: 20px; /* Espaciado inferior entre tablas */
+}
+
+
+/* Estilo para el botón de cerrar sesión */
+.btn-link {
+    color: #4e342e; /* Marrón oscuro para el texto */
+    font-weight: bold;
+    font-size: 1.1rem; /* Tamaño ligeramente mayor */
+    padding: 0.5rem 1rem; /* Espaciado para un botón más visible */
+
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+    .btn-link:hover {
+        color: #ffffff; /* Texto blanco al pasar el mouse */
+
+        text-decoration: none; /* Eliminar subrayado */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
     }
