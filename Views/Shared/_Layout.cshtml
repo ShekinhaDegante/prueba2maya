@@ -410,7 +410,7 @@
 
 @*  3 opcion *@
 
-<!DOCTYPE html>
+@* <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -501,13 +501,7 @@
         color: #d84315;
         }
 
-        .container {
-        background: #ffffff;
-        border-radius: 10px;
-        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-        padding: 2rem;
-        transition: box-shadow 0.3s ease, transform 0.3s ease;
-        }
+        
 
         .container:hover {
         transform: scale(1.02); /* Agrandar ligeramente el contenedor */
@@ -658,6 +652,8 @@
                                 <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Registrarse</a>
                             </li>
                         }
+
+
                     </ul>
                 </div>
             </div>
@@ -683,3 +679,365 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
 </html>
+ *@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Maya de Ambar</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        body {
+            background: url('~/imagen/fondoambar.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        .carousel {
+            margin-top: 20px;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: auto;
+            max-height: 300px; /* Limitar altura para que se vea bien */
+            object-fit: cover;
+        }
+
+        .navbar {
+            background-color: #ffb74d;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+            .navbar:hover {
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: #4e342e !important;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+        }
+
+        footer {
+            background-color: #ffcc80;
+            color: #4e342e;
+            padding: 1.5rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+            footer a {
+                color: #4e342e;
+                text-decoration: underline;
+                font-weight: bold;
+            }
+
+                footer a:hover {
+                    color: #d84315;
+                }
+
+
+        body {
+            background-color: #fff8e1; /* Fondo claro inspirado en tonos ámbar */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s ease; /* Suave transición en el fondo */
+        }
+
+        .navbar {
+            background-color: #ffb74d; /* Naranja ámbar */
+            padding: 0.5rem 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            transition: all 0.3s ease; /* Efecto de transición suave */
+        }
+
+            .navbar:hover {
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sombra más intensa al pasar el mouse */
+            }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: #4e342e !important; /* Marrón oscuro */
+            font-size: 1.4rem; /* Tamaño más grande */
+            letter-spacing: 1px; /* Espaciado entre letras */
+        }
+
+        .navbar-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+            .navbar-nav .nav-item {
+                margin: 0 0.75rem; /* Espaciado entre los botones */
+            }
+
+            .navbar-nav .nav-link {
+                color: #4e342e !important;
+                font-weight: 600;
+                font-size: 1.1rem; /* Texto ligeramente más grande */
+                padding: 0.75rem 1.5rem; /* Padding más amplio */
+                border-radius: 1rem; /* Bordes más redondeados */
+                text-transform: uppercase; /* Mayúsculas para los enlaces */
+                transition: all 0.3s ease; /* Transición suave para los efectos */
+            }
+
+                .navbar-nav .nav-link:hover {
+                    color: #ffffff !important;
+                    background-color: #d84315 !important; /* Naranja oscuro en hover */
+                    transform: scale(1.1); /* Agrandar más el botón en hover */
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+                }
+
+        .btn-link {
+            color: #4e342e !important;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+            .btn-link:hover {
+                color: #d84315;
+                text-decoration: underline;
+            }
+
+        footer {
+            background-color: #ffcc80; /* Fondo ámbar suave */
+            color: #4e342e;
+            padding: 1.5rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+            footer a {
+                color: #4e342e;
+                text-decoration: underline;
+                font-weight: bold;
+            }
+
+                footer a:hover {
+                    color: #d84315;
+                }
+
+         .container {
+        background-color: transparent; /* Sin color de fondo, para que se vea el fondo del body */
+        border-radius: 10px;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+         }
+
+            .container:hover {
+                transform: scale(1.02); /* Agrandar ligeramente el contenedor */
+                box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.15); /* Efecto de sombra en hover */
+            }
+
+        .pb-3 {
+            margin-top: 2rem;
+        }
+
+    </style>
+
+</head>
+
+<head>
+    <body>
+    
+            <header>
+       
+                    <nav class="navbar navbar-expand-sm navbar-light border-bottom box-shadow mb-3">
+               
+                            <nav class="navbar navbar-expand-sm navbar-light border-bottom box-shadow mb-3">
+                                <div class="container-fluid">
+                                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Welcome">Maya de Ambar</a>
+                                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                            aria-expanded="false" aria-label="Toggle navigation">
+                                        <span class="navbar-toggler-icon"></span>
+                                    </button>
+                                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-center">
+                                        <ul class="navbar-nav">
+                                            <!-- Enlaces existentes -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                
+                            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-center">
+                                <ul class="navbar-nav">
+
+                                    @if (User.IsInRole("Administrador"))
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="AuditoriaInventarios" asp-action="Index">Auditoria Inv.</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="CarritoVentas" asp-action="Index">Carrito Ventas</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="CarritoProductos" asp-action="Index">Carrito Productos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="CategoriasProductos" asp-action="Index">Categorias Productos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="ClientesFrecuentes" asp-action="Index">Clientes Frecuentes</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="DetallePedidos" asp-action="Index">Detalle Pedidos</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="DetallePedidosProveedores" asp-action="Index">Detalle Ped. Provee</a>
+                                        </li>
+
+
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Envios" asp-action="Index">Envios</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="HistorialPedidos" asp-action="Index">His. Pedidos</a>
+                                        </li>
+
+
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="HistorialPrecios" asp-action="Index">His. Precios</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="InventarioSucursal" asp-action="Index">Inv. Sucursa</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="ModosPagos" asp-action="Index">Modos de Pago</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Ofertas" asp-action="Index">Ofertas</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Pedidos" asp-action="Index">Pedidos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>
+                                        </li>
+
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle text-dark btn-outline-warning" href="#" id="adminMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Más Opciones
+                                            </a>
+
+                                            <ul class="dropdown-menu" aria-labelledby="adminDropdown" style="background-color: #ffcc80;">
+
+                                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Proveedores" asp-action="Index">Proveedores</a></li>
+                                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a></li>
+                                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Sucursales" asp-action="Index">Sucursales</a></li>
+                                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="TransaccionesPagos" asp-action="Index">Transacciones</a></li>
+                                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a></li>
+                                            </ul>
+                                        </li>
+
+                                    }
+                                    else if (User.IsInRole("Cliente"))
+                                    {
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="" asp-controller="CarritoProductos" asp-action="Index">Carrito Productos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="" asp-controller="DetallePedidos" asp-action="Index">Detalle Pedidos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="" asp-controller="Envios" asp-action="Index">Envios</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="" asp-controller="HistorialPedidos" asp-action="Index">His. Pedidos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="" asp-controller="ModosPagos" asp-action="Index">Modos de Pago</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="" asp-controller="Ofertas" asp-action="Index">Ofertas</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="" asp-controller="TransaccionesPagos" asp-action="Index">Transacciones</a>
+                                        </li>
+                                        <!-- Otros elementos para el Cliente -->
+                                    }
+                                </ul>
+                                <nav class="navbar navbar-expand-sm navbar-light border-bottom box-shadow mb-3">
+                                    <div class="container-fluid">
+                                        <!-- Contenido existente del navbar -->
+                                        <ul class="navbar-nav">
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <li class="nav-item">
+                                                    <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
+                                                        @Html.AntiForgeryToken()
+                                                        <button type="submit" class="btn btn-link">Cerrar sesión</button>
+                                                    </form>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li class="nav-item">
+                                                    <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Iniciar sesión</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Registrarse</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                 </nav>
+                            </div>
+                    </nav>
+            </header>
+    </body>
+    
+</head>
+
+
+<body>
+    
+
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div> 
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - Maya de Ambar - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
+        </div>
+    </footer>
+
+    @RenderSection("Scripts", required: false)
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
+
+
+
+ 

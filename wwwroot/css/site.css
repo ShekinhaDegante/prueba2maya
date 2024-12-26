@@ -303,7 +303,7 @@ h1 {
 
 /* Contenedor principal para ajustar el fondo */
 .container {
-    max-width: 1200px; /* Ampliar el ancho máximo */
+    max-width: 1600px; /* Ampliar el ancho máximo */
     padding: 20px; /* Espaciado interno */
     background-color: #fff8e1; /* Fondo claro */
     border-radius: 10px; /* Bordes redondeados */
