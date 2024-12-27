@@ -202,7 +202,13 @@ h1 {
     /*}*/
 
 
-/* Estilos generales*/
+
+
+    /*OPCION#2*/
+
+
+/*
+ Estilos generales*/
 body {
     background-color: #fff8e1; /* Fondo claro tipo ámbar */
     color: #3e2723; /* Texto en marrón oscuro */
@@ -211,17 +217,17 @@ body {
 
 .container {
     max-width: 900px;
-    margin-top: 50px;
+    margin-top: 80px;
 }
 
 .card {
-    border: 1px solid #c5a400; /* Borde dorado */
+    border: 1px solid #c5a400;  Borde dorado 
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
-    background-color: #c5a400; /* Fondo dorado para encabezado */
+    background-color: #c5a400;  Fondo dorado para encabezado 
     color: white;
     padding: 15px;
     font-size: 20px;
@@ -231,7 +237,7 @@ body {
 }
 
 .card-body {
-    background-color: #fff3e0; /* Fondo más suave */
+    background-color: #fff3e0;  Fondo más suave 
     padding: 20px;
 }
 
@@ -240,27 +246,28 @@ form .form-group label {
     color: #3e2723;
 }
 
-/* Estilo para los inputs */
+ /*Estilo para los inputs */
 input.form-control {
-    background-color: #fff9c4; /* Fondo ámbar suave */
-    border: 1px solid #c5a400; /* Borde dorado */
+    background-color: #fff9c4;  Fondo ámbar suave 
+    border: 1px solid #c5a400;  Borde dorado 
     border-radius: 5px;
     padding: 10px;
     font-size: 16px;
 }
 
     input.form-control:focus {
-        border-color: #ffb300; /* Borde dorado en el enfoque */
-        box-shadow: 0 0 5px rgba(255, 179, 0, 0.6); /* Sombra de enfoque en dorado */
+        border-color: #ffb300;  Borde dorado en el enfoque 
+        box-shadow: 0 0 5px rgba(255, 179, 0, 0.6);  Sombra de enfoque en dorado 
     }
 
     input.form-control::placeholder {
         color: #3e2723;
     }
 
-/* Estilos para el botón */
+/*
+ Estilos para el botón */
 button.btn-primary {
-    background-color: #c5a400; /* Color de fondo dorado */
+    background-color: #c5a400;  Color de fondo dorado 
     border: none;
     border-radius: 5px;
     padding: 12px;
@@ -271,16 +278,18 @@ button.btn-primary {
 }
 
     button.btn-primary:hover {
-        background-color: #ffb300; /* Hover dorado */
+        background-color: #ffb300;  Hover dorado 
     }
 
-/* Estilos para los mensajes de error */
+/*
+ Estilos para los mensajes de error */
 .text-danger {
     color: #d32f2f;
     font-size: 14px;
 }
 
-/* Estilo para el selector de rol */
+/*
+ Estilo para el selector de rol */
 select.form-control {
     background-color: #fff9c4;
     border: 1px solid #c5a400;
@@ -294,29 +303,32 @@ select.form-control {
         box-shadow: 0 0 5px rgba(255, 179, 0, 0.6);
     }
 
-/* Estilos generales para el contenido */
+/*
+ Estilos generales para el contenido */
 h1 {
-    color: #c5a400; /* Título en dorado */
+    color: #c5a400;  Título en dorado 
     text-align: center;
     margin-bottom: 30px;
 }
 
-/* Contenedor principal para ajustar el fondo */
+
+/* Contenedor principal para ajustar el fondo*/ 
 .container {
-    max-width: 1600px; /* Ampliar el ancho máximo */
-    padding: 20px; /* Espaciado interno */
-    background-color: #fff8e1; /* Fondo claro */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    max-width: 1600px;  Ampliar el ancho máximo 
+    padding: 20px;  Espaciado interno 
+    background-color: #fff8e1;  Fondo claro 
+    border-radius: 10px;  Bordes redondeados 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /*Sombra suave*/ 
     margin: 30px auto; /* Centrar el contenedor */
 }
+
 
 /* Estilos para la tabla */
 table.table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #fff3e0; /* Fondo ámbar suave para la tabla */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    background-color: #fff3e0;  /*Fondo ámbar suave para la tabla 
+*/    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /*Sombra suave */
 }
 
     table.table th, table.table td {
@@ -326,14 +338,14 @@ table.table {
     }
 
     table.table th {
-        background-color: #c5a400; /* Fondo dorado para los encabezados */
+        background-color: #c5a400; /* Fondo dorado para los encabezados*/ 
         color: white;
         font-size: 18px;
     }
 
     table.table td {
-        background-color: #fff9c4; /* Fondo suave ámbar para las celdas */
-        color: #3e2723; /* Texto en marrón oscuro */
+        background-color: #fff9c4;/*  Fondo suave ámbar para las celdas 
+*/        color: #3e2723;  /*Texto en marrón oscuro */
         font-size: 16px;
     }
 
@@ -343,8 +355,9 @@ table.table {
 
 
 /* Estilos para los enlaces de acción */
+
 a {
-    color: #c5a400; /* Color dorado para los enlaces */
+    color: #c5a400;  /*Color dorado para los enlaces */
     text-decoration: none;
     margin-right: 10px;
     font-weight: bold;
@@ -355,13 +368,14 @@ a {
     }
 
 /* Estilo de la sección de administración */
+
 p {
     text-align: right;
 }
 
     p a {
-        background-color: #c5a400; /* Fondo dorado para el botón */
-        color: white;
+        background-color: #c5a400;/*  Fondo dorado para el botón 
+*/        color: white;
         padding: 8px 15px;
         border-radius: 5px;
         font-weight: bold;
@@ -372,9 +386,11 @@ p {
             background-color: #ffb300; /* Hover dorado más claro */
         }
 
-/* Estilos de botones en el lado de las acciones */
+
+ /*Estilos de botones en el lado de las acciones */
+
 a[asp-action="Edit"], a[asp-action="Details"], a[asp-action="Delete"] {
-    background-color: #ffb300; /* Fondo dorado claro */
+    background-color: #ffb300;  /*Fondo dorado claro */
     color: white;
     padding: 6px 12px;
     border-radius: 5px;
@@ -386,10 +402,13 @@ a[asp-action="Edit"], a[asp-action="Details"], a[asp-action="Delete"] {
         background-color: #ff9800; /* Cambio de color a un dorado más cálido en hover */
     }
 
-/* Nuevos estilos para la sección de gestión de usuarios */
+
+/*
+ Nuevos estilos para la sección de gestión de usuarios*/ 
+
 h1 {
-    color: #B5651D; /* Color marrón */
-    font-family: 'Georgia', serif; /* Tipografía serif */
+    color: #B5651D;  /*Color marrón */
+    font-family: 'Georgia', serif; /* Tipografía serif*/ 
 }
 
 p {
@@ -402,18 +421,20 @@ a[asp-action="Create"] {
 }
 
     a[asp-action="Create"]:hover {
-        background-color: #B5651D; /* Hover con color más oscuro */
+        background-color: #B5651D;/*  Hover con color más oscuro */
     }
 
 table.table-striped {
-    border: 1px solid #D2B48C; /* Borde marrón claro */
-}
+    border: 1px solid #D2B48C;  /*Borde marrón claro 
+*/}
 
 table.table-light th {
-    background-color: #FFF3CD; /* Fondo amarillo claro */
+    background-color: #FFF3CD;  /*Fondo amarillo claro */
 }
 
-/* Estilos específicos de los botones de acción */
+
+ /*Estilos específicos de los botones de acción */
+
 .btn-outline-warning {
     color: #B5651D;
     border-color: #B5651D;
@@ -445,11 +466,11 @@ table.table-light th {
     }
 
 
-    /*correccion param ellipse boton verde*/
+  /*  correccion param ellipse boton verde*/
 
 .btn-create {
-    background-color: #FFBF00; /* Fondo dorado */
-    color: white;
+    background-color: #FFBF00;/*  Fondo dorado 
+*/    color: white;
     border: none;
     font-weight: bold;
 }
@@ -459,11 +480,13 @@ table.table-light th {
     }
 
 
-  /*  PLUSS*/
-/* Estilo para el menú desplegable */
+  /*  PLUSS
+ Estilo para el menú desplegable*/ 
+
+
 .dropdown-menu .dropdown-item {
-    background-color: #FFF2CC; /* Fondo claro con tono ámbar suave */
-    color: #E67E22; /* Texto naranja oscuro sutil */
+    background-color: #FFF2CC;  /*Fondo claro con tono ámbar suave*/ 
+    color: #E67E22;  /*Texto naranja oscuro sutil */
     font-weight: bold;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -475,30 +498,36 @@ table.table-light th {
     }
 
 
-
-/* Ampliación del fondo detrás de las tablas */
+/*
+ Ampliación del fondo detrás de las tablas */
 .table-container {
-    background-color: #fff9c4; /* Fondo ámbar suave */
-    padding: 30px; /* Espaciado interno para mayor amplitud */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
-    margin-bottom: 20px; /* Espaciado inferior entre tablas */
+    background-color: #fff9c4;  /*Fondo ámbar suave 
+*/    padding: 30px; /* Espaciado interno para mayor amplitud */
+    border-radius: 30px;  /*Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);/*  Sombra suave 
+*/    margin-bottom: 20px;  /*Espaciado inferior entre tablas */
 }
 
 
-/* Estilo para el botón de cerrar sesión */
+/* Estilo para el botón de cerrar sesión*/ 
+
+
 .btn-link {
     color: #4e342e; /* Marrón oscuro para el texto */
     font-weight: bold;
-    font-size: 1.1rem; /* Tamaño ligeramente mayor */
-    padding: 0.5rem 1rem; /* Espaciado para un botón más visible */
-
+    font-size: 1.1rem;  /*Tamaño ligeramente mayor 
+*/    padding: 0.5rem 1rem;  /*Espaciado para un botón más visible 
+*/
     transition: all 0.3s ease; /* Transición suave */
 }
 
     .btn-link:hover {
-        color: #ffffff; /* Texto blanco al pasar el mouse */
+        color: #ffffff;  /*Texto blanco al pasar el mouse*/ 
 
         text-decoration: none; /* Eliminar subrayado */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  /*Sombra suave */
     }
+
+
+
+
