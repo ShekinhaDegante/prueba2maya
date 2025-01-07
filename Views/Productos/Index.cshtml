@@ -99,7 +99,12 @@
 <div class="container my-5">
     <div class="text-center mb-4">
         <h1 class="titulo-categoria">Productos</h1>
-        <p class="descripcion-categoria">Aquí puedes gestionar los productos disponibles.</p>
+
+        <!-- Mostrar solo si el usuario es administrador -->
+        @if (User.IsInRole("Administrador"))
+        {
+            <p class="descripcion-categoria">Aquí puedes gestionar los productos disponibles.</p>
+        }
     </div>
 
     <!-- Mostrar solo si el usuario es administrador -->
@@ -119,11 +124,16 @@
                 <th>@Html.DisplayNameFor(model => model.Descripcion)</th>
                 <th>@Html.DisplayNameFor(model => model.Precio)</th>
                 <th>@Html.DisplayNameFor(model => model.CantidadDisponible)</th>
-                <th>@Html.DisplayNameFor(model => model.ImagenUrl)</th>
-                <th>@Html.DisplayNameFor(model => model.IdCategoriaNavigation)</th>
-                <th>@Html.DisplayNameFor(model => model.IdProveedorNavigation)</th>
-                <th>@Html.DisplayNameFor(model => model.IdSucursalNavigation)</th>
-                <th class="text-center">Acciones</th>
+                <th>Imagen</th>
+
+                <!-- Mostrar estas columnas solo si el usuario es administrador -->
+                @if (User.IsInRole("Administrador"))
+                {
+                    <th>@Html.DisplayNameFor(model => model.IdCategoriaNavigation)</th>
+                    <th>@Html.DisplayNameFor(model => model.IdProveedorNavigation)</th>
+                    <th>@Html.DisplayNameFor(model => model.IdSucursalNavigation)</th>
+                    <th class="text-center">Acciones</th>
+                }
             </tr>
         </thead>
         <tbody>
@@ -134,14 +144,18 @@
                     <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
                     <td>@Html.DisplayFor(modelItem => item.Precio)</td>
                     <td>@Html.DisplayFor(modelItem => item.CantidadDisponible)</td>
-                    <td>@Html.DisplayFor(modelItem => item.ImagenUrl)</td>
-                    <td>@Html.DisplayFor(modelItem => item.IdCategoriaNavigation.IdCategoria)</td>
-                    <td>@Html.DisplayFor(modelItem => item.IdProveedorNavigation.IdProveedor)</td>
-                    <td>@Html.DisplayFor(modelItem => item.IdSucursalNavigation.IdSucursal)</td>
-                    <td class="text-center">
-                        <!-- Mostrar solo si el usuario es administrador -->
-                        @if (User.IsInRole("Administrador"))
-                        {
+                    <td>
+                        <img src="@item.ImagenUrl" alt="Imagen del producto" width="100" />
+                    </td>
+
+                    <!-- Mostrar estas celdas solo si el usuario es administrador -->
+                    @if (User.IsInRole("Administrador"))
+                    {
+                        <td>@Html.DisplayFor(modelItem => item.IdCategoriaNavigation.NombreCategoria)</td>
+                        <td>@Html.DisplayFor(modelItem => item.IdProveedorNavigation.NombreProveedor)</td>
+                        <td>@Html.DisplayFor(modelItem => item.IdSucursalNavigation.NombreSucursal)</td>
+
+                        <td class="text-center">
                             <a asp-action="Edit" asp-route-id="@item.IdProducto" class="btn btn-sm btn-outline-warning">
                                 <i class="bi bi-pencil-square"></i> Editar
                             </a>
@@ -151,10 +165,15 @@
                             <a asp-action="Delete" asp-route-id="@item.IdProducto" class="btn btn-sm btn-outline-danger">
                                 <i class="bi bi-trash"></i> Eliminar
                             </a>
-                        }
-                    </td>
+                        </td>
+                    }
+
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+
+
+

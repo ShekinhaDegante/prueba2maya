@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -49,25 +50,62 @@ namespace prueba2maya.Controllers
         // GET: Productos/Create
         public IActionResult Create()
         {
-            ViewData["IdCategoria"] = new SelectList(_context.CategoriasProductos, "IdCategoria", "IdCategoria");
-            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "IdProveedor");
-            ViewData["IdSucursal"] = new SelectList(_context.Sucursales, "IdSucursal", "IdSucursal");
+            ViewData["IdCategoria"] = new SelectList(_context.CategoriasProductos, "IdCategoria", "NombreCategoria");
+            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "NombreProveedor");
+            ViewData["IdSucursal"] = new SelectList(_context.Sucursales, "IdSucursal", "NombreSucursal");
             return View();
         }
 
         // POST: Productos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdProducto,NombreProducto,Descripcion,Precio,CantidadDisponible,IdCategoria,IdSucursal,IdProveedor,ImagenUrl")] Producto producto)
+        public async Task<IActionResult> Create(IFormFile Imagen, [Bind("IdProducto,NombreProducto,Descripcion,Precio,CantidadDisponible,IdCategoria,IdSucursal,IdProveedor,ImagenUrl")] Producto producto)
         {
             if (ModelState.IsValid)
             {
+                if (Imagen != null && Imagen.Length > 0)
+                {
+                    var supportedTypes = new[] { "jpg", "jpeg", "png", "gif" };
+                    var fileExt = Path.GetExtension(Imagen.FileName).Substring(1).ToLower();
+
+                    if (!supportedTypes.Contains(fileExt))
+                    {
+                        ModelState.AddModelError("Imagen", "Solo se permiten archivos de imagen (jpg, jpeg, png, gif).");
+                        ViewData["IdCategoria"] = new SelectList(_context.CategoriasProductos, "IdCategoria", "IdCategoria", producto.IdCategoria);
+                        ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "IdProveedor", producto.IdProveedor);
+                        ViewData["IdSucursal"] = new SelectList(_context.Sucursales, "IdSucursal", "IdSucursal", producto.IdSucursal);
+                        return View(producto);
+                    }
+
+                    if (Imagen.Length > 2 * 1024 * 1024) // Limitar a 2MB
+                    {
+                        ModelState.AddModelError("Imagen", "El archivo es demasiado grande. Máximo 2MB.");
+                        ViewData["IdCategoria"] = new SelectList(_context.CategoriasProductos, "IdCategoria", "IdCategoria", producto.IdCategoria);
+                        ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "IdProveedor", producto.IdProveedor);
+                        ViewData["IdSucursal"] = new SelectList(_context.Sucursales, "IdSucursal", "IdSucursal", producto.IdSucursal);
+                        return View(producto);
+                    }
+
+                    var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                    Directory.CreateDirectory(uploadsFolder); // Asegurarse de que la carpeta exista
+
+                    var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(Imagen.FileName);
+                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await Imagen.CopyToAsync(fileStream);
+                    }
+
+                    producto.ImagenUrl = "/images/" + uniqueFileName;
+                }
+
                 _context.Add(producto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["IdCategoria"] = new SelectList(_context.CategoriasProductos, "IdCategoria", "IdCategoria", producto.IdCategoria);
             ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "IdProveedor", producto.IdProveedor);
             ViewData["IdSucursal"] = new SelectList(_context.Sucursales, "IdSucursal", "IdSucursal", producto.IdSucursal);
@@ -87,18 +125,17 @@ namespace prueba2maya.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdCategoria"] = new SelectList(_context.CategoriasProductos, "IdCategoria", "IdCategoria", producto.IdCategoria);
-            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "IdProveedor", producto.IdProveedor);
-            ViewData["IdSucursal"] = new SelectList(_context.Sucursales, "IdSucursal", "IdSucursal", producto.IdSucursal);
+            ViewData["IdCategoria"] = new SelectList(_context.CategoriasProductos, "IdCategoria", "NombreCategoria", producto.IdCategoria);
+            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "NombreProveedor", producto.IdProveedor);
+            ViewData["IdSucursal"] = new SelectList(_context.Sucursales, "IdSucursal", "NombreSucursal", producto.IdSucursal);
             return View(producto);
         }
 
         // POST: Productos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdProducto,NombreProducto,Descripcion,Precio,CantidadDisponible,IdCategoria,IdSucursal,IdProveedor,ImagenUrl")] Producto producto)
+        public async Task<IActionResult> Edit(int id, IFormFile Imagen, [Bind("IdProducto,NombreProducto,Descripcion,Precio,CantidadDisponible,IdCategoria,IdSucursal,IdProveedor,ImagenUrl")] Producto producto)
         {
             if (id != producto.IdProducto)
             {
@@ -109,6 +146,39 @@ namespace prueba2maya.Controllers
             {
                 try
                 {
+                    // Verificar si se sube una nueva imagen
+                    if (Imagen != null && Imagen.Length > 0)
+                    {
+                        var supportedTypes = new[] { "jpg", "jpeg", "png", "gif" };
+                        var fileExt = Path.GetExtension(Imagen.FileName).Substring(1).ToLower();
+
+                        if (!supportedTypes.Contains(fileExt))
+                        {
+                            ModelState.AddModelError("Imagen", "Solo se permiten archivos de imagen (jpg, jpeg, png, gif).");
+                            return View(producto);
+                        }
+
+                        if (Imagen.Length > 2 * 1024 * 1024) // Limitar a 2MB
+                        {
+                            ModelState.AddModelError("Imagen", "El archivo es demasiado grande. Máximo 2MB.");
+                            return View(producto);
+                        }
+
+                        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                        Directory.CreateDirectory(uploadsFolder);
+
+                        var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(Imagen.FileName);
+                        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await Imagen.CopyToAsync(fileStream);
+                        }
+
+                        producto.ImagenUrl = "/images/" + uniqueFileName;
+                    }
+
+                    // Actualizar los detalles del producto en la base de datos
                     _context.Update(producto);
                     await _context.SaveChangesAsync();
                 }
@@ -125,6 +195,7 @@ namespace prueba2maya.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["IdCategoria"] = new SelectList(_context.CategoriasProductos, "IdCategoria", "IdCategoria", producto.IdCategoria);
             ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "IdProveedor", producto.IdProveedor);
             ViewData["IdSucursal"] = new SelectList(_context.Sucursales, "IdSucursal", "IdSucursal", producto.IdSucursal);
@@ -166,14 +237,16 @@ namespace prueba2maya.Controllers
             {
                 _context.Productos.Remove(producto);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        // Método para verificar si un producto existe
         private bool ProductoExists(int id)
         {
-          return (_context.Productos?.Any(e => e.IdProducto == id)).GetValueOrDefault();
+            return _context.Productos.Any(e => e.IdProducto == id);
         }
+
+        // Métodos Delete y Existentes no requieren cambios.
     }
 }
