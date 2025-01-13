@@ -20,10 +20,18 @@ namespace prueba2maya.Controllers
         }
 
         // GET: Productos
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var tiendaContext = _context.Productos.Include(p => p.IdCategoriaNavigation).Include(p => p.IdProveedorNavigation).Include(p => p.IdSucursalNavigation);
-            return View(await tiendaContext.ToListAsync());
+            var productos = _context.Productos.Include(p => p.IdCategoriaNavigation).Include(p => p.IdProveedorNavigation).Include(p => p.IdSucursalNavigation).ToList();
+
+            if (User.IsInRole("Administrador"))
+            {
+                return View("Index", productos); // Vista para el administrador
+            }
+            else
+            {
+                return View("IndexCliente", productos); // Vista para el cliente
+            }
         }
 
         // GET: Productos/Details/5
@@ -57,7 +65,6 @@ namespace prueba2maya.Controllers
         }
 
         // POST: Productos/Create
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(IFormFile Imagen, [Bind("IdProducto,NombreProducto,Descripcion,Precio,CantidadDisponible,IdCategoria,IdSucursal,IdProveedor,ImagenUrl")] Producto producto)
@@ -72,18 +79,12 @@ namespace prueba2maya.Controllers
                     if (!supportedTypes.Contains(fileExt))
                     {
                         ModelState.AddModelError("Imagen", "Solo se permiten archivos de imagen (jpg, jpeg, png, gif).");
-                        ViewData["IdCategoria"] = new SelectList(_context.CategoriasProductos, "IdCategoria", "IdCategoria", producto.IdCategoria);
-                        ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "IdProveedor", producto.IdProveedor);
-                        ViewData["IdSucursal"] = new SelectList(_context.Sucursales, "IdSucursal", "IdSucursal", producto.IdSucursal);
                         return View(producto);
                     }
 
                     if (Imagen.Length > 2 * 1024 * 1024) // Limitar a 2MB
                     {
                         ModelState.AddModelError("Imagen", "El archivo es demasiado grande. Máximo 2MB.");
-                        ViewData["IdCategoria"] = new SelectList(_context.CategoriasProductos, "IdCategoria", "IdCategoria", producto.IdCategoria);
-                        ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "IdProveedor", producto.IdProveedor);
-                        ViewData["IdSucursal"] = new SelectList(_context.Sucursales, "IdSucursal", "IdSucursal", producto.IdSucursal);
                         return View(producto);
                     }
 
@@ -106,9 +107,9 @@ namespace prueba2maya.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["IdCategoria"] = new SelectList(_context.CategoriasProductos, "IdCategoria", "IdCategoria", producto.IdCategoria);
-            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "IdProveedor", producto.IdProveedor);
-            ViewData["IdSucursal"] = new SelectList(_context.Sucursales, "IdSucursal", "IdSucursal", producto.IdSucursal);
+            ViewData["IdCategoria"] = new SelectList(_context.CategoriasProductos, "IdCategoria", "NombreCategoria", producto.IdCategoria);
+            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "NombreProveedor", producto.IdProveedor);
+            ViewData["IdSucursal"] = new SelectList(_context.Sucursales, "IdSucursal", "NombreSucursal", producto.IdSucursal);
             return View(producto);
         }
 
@@ -132,7 +133,6 @@ namespace prueba2maya.Controllers
         }
 
         // POST: Productos/Edit/5
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, IFormFile Imagen, [Bind("IdProducto,NombreProducto,Descripcion,Precio,CantidadDisponible,IdCategoria,IdSucursal,IdProveedor,ImagenUrl")] Producto producto)
@@ -146,7 +146,6 @@ namespace prueba2maya.Controllers
             {
                 try
                 {
-                    // Verificar si se sube una nueva imagen
                     if (Imagen != null && Imagen.Length > 0)
                     {
                         var supportedTypes = new[] { "jpg", "jpeg", "png", "gif" };
@@ -178,7 +177,6 @@ namespace prueba2maya.Controllers
                         producto.ImagenUrl = "/images/" + uniqueFileName;
                     }
 
-                    // Actualizar los detalles del producto en la base de datos
                     _context.Update(producto);
                     await _context.SaveChangesAsync();
                 }
@@ -196,9 +194,9 @@ namespace prueba2maya.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["IdCategoria"] = new SelectList(_context.CategoriasProductos, "IdCategoria", "IdCategoria", producto.IdCategoria);
-            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "IdProveedor", producto.IdProveedor);
-            ViewData["IdSucursal"] = new SelectList(_context.Sucursales, "IdSucursal", "IdSucursal", producto.IdSucursal);
+            ViewData["IdCategoria"] = new SelectList(_context.CategoriasProductos, "IdCategoria", "NombreCategoria", producto.IdCategoria);
+            ViewData["IdProveedor"] = new SelectList(_context.Proveedores, "IdProveedor", "NombreProveedor", producto.IdProveedor);
+            ViewData["IdSucursal"] = new SelectList(_context.Sucursales, "IdSucursal", "NombreSucursal", producto.IdSucursal);
             return View(producto);
         }
 
@@ -241,12 +239,10 @@ namespace prueba2maya.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        // Método para verificar si un producto existe
+
         private bool ProductoExists(int id)
         {
             return _context.Productos.Any(e => e.IdProducto == id);
         }
-
-        // Métodos Delete y Existentes no requieren cambios.
     }
 }
