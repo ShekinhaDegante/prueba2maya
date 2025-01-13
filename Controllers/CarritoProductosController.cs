@@ -169,5 +169,39 @@ namespace prueba2maya.Controllers
         {
           return (_context.CarritoProductos?.Any(e => e.IdCarritoProducto == id)).GetValueOrDefault();
         }
+
+        // POST: CarritoProductos/AddToCart
+        [HttpPost]
+        public async Task<IActionResult> AddToCart(int idProducto)
+        {
+            // Obtener el usuario actual (puedes personalizar esto según tu sistema de autenticación)
+            var idCarrito = 1; // ID del carrito actual, este debe estar asociado al usuario logueado.
+
+            // Verificar si ya existe el producto en el carrito
+            var carritoProducto = await _context.CarritoProductos
+                .FirstOrDefaultAsync(cp => cp.IdProducto == idProducto && cp.IdCarrito == idCarrito);
+
+            if (carritoProducto != null)
+            {
+                // Si ya existe, incrementamos la cantidad
+                carritoProducto.Cantidad++;
+                _context.Update(carritoProducto);
+            }
+            else
+            {
+                // Si no existe, lo agregamos al carrito
+                carritoProducto = new CarritoProducto
+                {
+                    IdCarrito = idCarrito,
+                    IdProducto = idProducto,
+                    Cantidad = 1
+                };
+                _context.Add(carritoProducto);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Productos"); // Cambia esto según la acción que lista los productos
+        }
+
     }
 }
