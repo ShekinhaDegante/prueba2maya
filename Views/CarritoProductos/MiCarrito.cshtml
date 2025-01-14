@@ -1,0 +1,48 @@
+﻿@model IEnumerable<prueba2maya.Models.CarritoProducto>
+
+<h2>Mi Carrito</h2>
+
+@if (!Model.Any())
+{
+    <p>@ViewBag.Mensaje</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.IdProductoNavigation.NombreProducto</td>
+                    <td>@item.Cantidad</td>
+                    <td>@item.IdProductoNavigation.Precio</td>
+                    <td>@(item.Cantidad * item.IdProductoNavigation.Precio)</td>
+                    <td>
+                        <form asp-action="EliminarProducto" asp-controller="CarritoProductos" method="post">
+                            <input type="hidden" name="idCarritoProducto" value="@item.IdCarritoProducto" />
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p>
+        <strong>Total del carrito:</strong>
+        @Model.Sum(x => x.Cantidad * x.IdProductoNavigation.Precio)
+    </p>
+
+    <form asp-action="ProcesarPedido" asp-controller="CarritoProductos" method="post">
+        <button type="submit" class="btn btn-success">Procesar Pedido</button>
+    </form>
+}
