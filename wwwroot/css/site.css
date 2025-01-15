@@ -210,24 +210,24 @@ h1 {
 /*
  Estilos generales*/
 body {
-    background-color: #fff8e1; /* Fondo claro tipo ámbar */
+    background-color: red; /* Fondo claro tipo ámbar */
     color: #3e2723; /* Texto en marrón oscuro */
     font-family: 'Arial', sans-serif;
 }
 
 .container {
-    max-width: 900px;
-    margin-top: 80px;
+    max-width: 1000px;
+    margin-top: 70px;
 }
 
 .card {
-    border: 1px solid #c5a400;  Borde dorado 
+    border: 1px solid #c5a400;  /*Borde dorado */
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
-    background-color: #c5a400;  Fondo dorado para encabezado 
+    background-color: #c5a400;/*  Fondo dorado para encabezado*/ 
     color: white;
     padding: 15px;
     font-size: 20px;
@@ -237,7 +237,7 @@ body {
 }
 
 .card-body {
-    background-color: #fff3e0;  Fondo más suave 
+    background-color: #fff3e0;  /*Fondo más suave */
     padding: 20px;
 }
 
@@ -248,16 +248,16 @@ form .form-group label {
 
  /*Estilo para los inputs */
 input.form-control {
-    background-color: #fff9c4;  Fondo ámbar suave 
-    border: 1px solid #c5a400;  Borde dorado 
+    background-color: #fff9c4; /* Fondo ámbar suave*/ 
+    border: 1px solid #c5a400;  /*Borde dorado */
     border-radius: 5px;
     padding: 10px;
     font-size: 16px;
 }
 
     input.form-control:focus {
-        border-color: #ffb300;  Borde dorado en el enfoque 
-        box-shadow: 0 0 5px rgba(255, 179, 0, 0.6);  Sombra de enfoque en dorado 
+        border-color: #ffb300; /* Borde dorado en el enfoque */
+        box-shadow: 0 0 5px rgba(255, 179, 0, 0.6); /* Sombra de enfoque en dorado */
     }
 
     input.form-control::placeholder {
@@ -267,7 +267,7 @@ input.form-control {
 /*
  Estilos para el botón */
 button.btn-primary {
-    background-color: #c5a400;  Color de fondo dorado 
+    background-color: #c5a400; /* Color de fondo dorado */
     border: none;
     border-radius: 5px;
     padding: 12px;
@@ -278,7 +278,7 @@ button.btn-primary {
 }
 
     button.btn-primary:hover {
-        background-color: #ffb300;  Hover dorado 
+        background-color: #ffb300;  /*Hover dorado */
     }
 
 /*
@@ -306,7 +306,7 @@ select.form-control {
 /*
  Estilos generales para el contenido */
 h1 {
-    color: #c5a400;  Título en dorado 
+    color: #c5a400; /* Título en dorado */
     text-align: center;
     margin-bottom: 30px;
 }
@@ -314,10 +314,10 @@ h1 {
 
 /* Contenedor principal para ajustar el fondo*/ 
 .container {
-    max-width: 1600px;  Ampliar el ancho máximo 
-    padding: 20px;  Espaciado interno 
-    background-color: #fff8e1;  Fondo claro 
-    border-radius: 10px;  Bordes redondeados 
+    max-width: 1800px;  /*Ampliar el ancho máximo */
+    padding: 20px; /* Espaciado interno */
+    background-color: #fff8e1;  /*Fondo claro */
+    border-radius: 10px;  /*Bordes redondeados */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /*Sombra suave*/ 
     margin: 30px auto; /* Centrar el contenedor */
 }
@@ -327,8 +327,8 @@ h1 {
 table.table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #fff3e0;  /*Fondo ámbar suave para la tabla 
-*/    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /*Sombra suave */
+    background-color: #fff3e0;  /*Fondo ámbar suave para la tabla */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /*Sombra suave */
 }
 
     table.table th, table.table td {
@@ -375,7 +375,7 @@ p {
 
     p a {
         background-color: #c5a400;/*  Fondo dorado para el botón 
-*/        color: white;
+*/      color: white;
         padding: 8px 15px;
         border-radius: 5px;
         font-weight: bold;
@@ -412,7 +412,7 @@ h1 {
 }
 
 p {
-    color: #8B4513; /* Color marrón claro */
+    color: #808080; /* Color gris al texto de los recuadros de descripciones */
 }
 
 a[asp-action="Create"] {

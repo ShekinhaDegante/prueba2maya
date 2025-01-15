@@ -410,7 +410,7 @@
 
 
 
-@*  3 opcion *@
+@*  3 opcion LA MERA *@
 
 <!DOCTYPE html>
 <html lang="en">
@@ -691,9 +691,7 @@
 
 
 
-@* 
-
-<!DOCTYPE html>
+@* <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -1049,3 +1047,174 @@
 
 
   *@
+
+
+@* 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Maya de Ambar</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        body {
+            background-color: #fff8e1; /* Fondo claro inspirado en tonos ámbar */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s ease; /* Suave transición en el fondo */
+        }
+
+        .navbar {
+            background-color: #ffb74d; /* Naranja ámbar */
+            padding: 0.5rem 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            transition: all 0.3s ease; /* Efecto de transición suave */
+        }
+
+            .navbar:hover {
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sombra más intensa al pasar el mouse */
+            }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: #4e342e !important; /* Marrón oscuro */
+            font-size: 1.4rem; /* Tamaño más grande */
+            letter-spacing: 1px; /* Espaciado entre letras */
+        }
+
+        .navbar-nav .nav-link {
+            color: #4e342e !important;
+            font-weight: 600;
+            font-size: 1.1rem; /* Texto ligeramente más grande */
+            padding: 0.75rem 1.5rem; /* Padding más amplio */
+            border-radius: 1rem; /* Bordes más redondeados */
+            text-transform: uppercase; /* Mayúsculas para los enlaces */
+            transition: all 0.3s ease; /* Transición suave para los efectos */
+        }
+
+            .navbar-nav .nav-link:hover {
+                color: #ffffff !important;
+                background-color: #d84315 !important; /* Naranja oscuro en hover */
+                transform: scale(1.1); /* Agrandar más el botón en hover */
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+            }
+
+        footer {
+            background-color: #ffcc80; /* Fondo ámbar suave */
+            color: #4e342e;
+            padding: 1.5rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+            footer a {
+                color: #4e342e;
+                text-decoration: underline;
+                font-weight: bold;
+            }
+
+                footer a:hover {
+                    color: #d84315;
+                }
+
+        .carousel-item img {
+            object-fit: cover;
+            height: 40vh;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Welcome">Maya de Ambar</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Ofertas" asp-action="Index">Ofertas</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-link">Cerrar sesión</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Iniciar sesión</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Registrarse</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Carrusel solo en la página principal -->
+    @if (ViewData["Title"] == "Home")
+    {
+        <div class="container-fluid p-0">
+            <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="/imagen/joye.jpg" class="d-block w-100" alt="Joyería de Ámbar">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/imagen/colla.jpg" class="d-block w-100" alt="Collares de Ámbar">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/imagen/zancudo.jpg" class="d-block w-100" alt="Zancudo de Ámbar">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+        </div>
+    }
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - Maya de Ambar - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
+        </div>
+    </footer>
+
+    @RenderSection("Scripts", required: false)
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
+
+ *@
+
