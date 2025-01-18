@@ -28,7 +28,8 @@ else
                     <td>@(item.Cantidad * item.IdProductoNavigation.Precio)</td>
                     <td>
                         <form asp-action="EliminarProducto" asp-controller="CarritoProductos" method="post">
-                            <input type="hidden" name="idCarritoProducto" value="@item.IdCarritoProducto" />
+                            <!-- Aquí se pasa el ID del producto, no el ID de CarritoProducto -->
+                            <input type="hidden" name="idProducto" value="@item.IdProducto" />
                             <button type="submit" class="btn btn-danger">Eliminar</button>
                         </form>
                     </td>

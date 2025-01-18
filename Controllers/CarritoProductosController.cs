@@ -19,7 +19,6 @@ namespace prueba2maya.Controllers
         // GET: MiCarrito
         public async Task<IActionResult> MiCarrito()
         {
-            // Obtener el IdUsuario del usuario logueado
             var idUsuario = 1; // Reemplázalo con el valor real de usuario logueado
 
             // Buscar el carrito del usuario
@@ -28,7 +27,7 @@ namespace prueba2maya.Controllers
 
             if (carrito == null)
             {
-                // Si no existe un carrito, se puede mostrar un mensaje
+                // Si no existe un carrito, mostrar mensaje
                 ViewBag.Message = "Tu carrito está vacío.";
                 return View();
             }
@@ -36,25 +35,21 @@ namespace prueba2maya.Controllers
             // Obtener los productos del carrito
             var productosCarrito = await _context.CarritoProductos
                 .Where(cp => cp.IdCarrito == carrito.IdCarrito)
-                .Include(cp => cp.IdProductoNavigation) // Asumiendo que tienes una relación de navegación para Producto
+                .Include(cp => cp.IdProductoNavigation)
                 .ToListAsync();
 
             return View(productosCarrito);
         }
 
-        // POST: CarritoVenta/AddToCart
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddToCart(int idProducto)
         {
-            // Obtener el IdUsuario del usuario logueado
-            var idUsuario = 1;  // Reemplázalo con el valor real de usuario logueado
+            var idUsuario = 1; // Obtén el ID del usuario logueado dinámicamente.
 
             // Verificar si el usuario tiene un carrito
-            var carrito = await _context.CarritoVentas
-                .FirstOrDefaultAsync(c => c.IdUsuario == idUsuario);
+            var carrito = await _context.CarritoVentas.FirstOrDefaultAsync(c => c.IdUsuario == idUsuario);
 
-            // Si no tiene carrito, crea uno nuevo
             if (carrito == null)
             {
                 carrito = new CarritoVenta
@@ -63,7 +58,7 @@ namespace prueba2maya.Controllers
                     FechaCreacion = DateTime.Now
                 };
                 _context.CarritoVentas.Add(carrito);
-                await _context.SaveChangesAsync(); // Guardar carrito recién creado
+                await _context.SaveChangesAsync();
             }
 
             // Verificar si el producto ya está en el carrito
@@ -72,13 +67,11 @@ namespace prueba2maya.Controllers
 
             if (carritoProducto != null)
             {
-                // Si el producto ya está en el carrito, aumentar la cantidad
                 carritoProducto.Cantidad++;
                 _context.Update(carritoProducto);
             }
             else
             {
-                // Si no existe, agregarlo
                 carritoProducto = new CarritoProducto
                 {
                     IdCarrito = carrito.IdCarrito,
@@ -88,17 +81,54 @@ namespace prueba2maya.Controllers
                 _context.CarritoProductos.Add(carritoProducto);
             }
 
-            await _context.SaveChangesAsync(); // Guardar los cambios
+            await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(MiCarrito)); // Redirigir a la vista del carrito
+            return Json(new { success = true, message = "Producto agregado al carrito exitosamente." });
         }
 
-        // POST: EliminarProducto
+        // GET: CarritoProductos/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var carritoProducto = await _context.CarritoProductos
+                .Include(cp => cp.IdCarritoNavigation)
+                .Include(cp => cp.IdProductoNavigation)
+                .FirstOrDefaultAsync(cp => cp.IdCarritoProducto == id);
+
+            if (carritoProducto == null)
+            {
+                return NotFound();
+            }
+
+            return View(carritoProducto);
+        }
+
+        // POST: CarritoProductos/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var carritoProducto = await _context.CarritoProductos.FindAsync(id);
+
+            if (carritoProducto == null)
+            {
+                return NotFound();
+            }
+
+            _context.CarritoProductos.Remove(carritoProducto);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(MiCarrito));
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EliminarProducto(int idProducto)
         {
-            // ID del carrito asociado al usuario actual
             var idUsuario = 1; // Reemplázalo con el valor real de usuario logueado
 
             // Buscar el carrito del usuario
@@ -124,5 +154,6 @@ namespace prueba2maya.Controllers
 
             return RedirectToAction(nameof(MiCarrito)); // Redirigir a la vista del carrito
         }
+
     }
 }

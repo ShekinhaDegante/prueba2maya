@@ -21,7 +21,7 @@
                         <p class="card-text">@item.Descripcion</p>
                         <p class="card-text text-primary fw-bold">Precio: @(item.Precio.HasValue ? item.Precio.Value.ToString("") : "No disponible")</p>
 
-                        <form asp-action="AddToCart" asp-controller="CarritoProductos" method="post">
+                        <form class="add-to-cart-form" method="post">
                             <input type="hidden" name="idProducto" value="@item.IdProducto" />
                             <button type="submit" class="btn btn-success btn-sm w-100">
                                 <i class="bi bi-cart-plus"></i> Agregar al Carrito
@@ -33,3 +33,53 @@
         }
     </div>
 </div>
+
+<!-- Mensaje para notificaciones -->
+<div id="notification" class="alert alert-success" style="display: none; position: fixed; bottom: 10px; right: 10px; z-index: 1050;"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const forms = document.querySelectorAll(".add-to-cart-form");
+
+        forms.forEach(form => {
+            form.addEventListener("submit", async function (event) {
+                event.preventDefault(); // Prevenir el envío del formulario
+
+                const formData = new FormData(form);
+                const idProducto = formData.get("idProducto");
+
+                try {
+                    const response = await fetch('/CarritoProductos/AddToCart', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                        }
+                    });
+
+                    const data = await response.json();
+
+                    // Mostrar el mensaje de acuerdo con la respuesta del servidor
+                    if (data.success) {
+                        showNotification(data.message, "success");
+                    } else {
+                        showNotification(data.message, "danger");
+                    }
+                } catch (error) {
+                    showNotification("Error de conexión. Inténtalo nuevamente.", "danger");
+                }
+            });
+        });
+
+        function showNotification(message, type) {
+            const notification = document.getElementById("notification");
+            notification.textContent = message;
+            notification.className = `alert alert-${type}`;
+            notification.style.display = "block";
+
+            setTimeout(() => {
+                notification.style.display = "none";
+            }, 3000);
+        }
+    });
+</script>
